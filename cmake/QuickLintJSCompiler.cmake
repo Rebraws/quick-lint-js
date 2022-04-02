@@ -120,6 +120,9 @@ function (quick_lint_js_use_new_msvc_preprocessor)
   quick_lint_js_get_supported_warning_options(/wd5105 WARNING_OPTIONS_TO_ADD)
   add_compile_options(${WARNING_OPTIONS_TO_ADD})
   add_definitions(-DWIN32_LEAN_AND_MEAN)
+
+  # @@@
+  add_definitions(-D_WIN32_WINNT=0x0602)
 endfunction ()
 
 function (quick_lint_js_add_warning_options_if_supported)

@@ -24,7 +24,7 @@
 #if defined(QLJS_HAVE_FCNTL_H) && QLJS_HAVE_FCNTL_H
 #elif defined(__has_include)
 #if __has_include(<fcntl.h>)
-#define QLJS_HAVE_FCNTL_H 1
+//@@@ #define QLJS_HAVE_FCNTL_H 1
 #endif
 #elif defined(__unix__)
 #define QLJS_HAVE_FCNTL_H 1
@@ -36,7 +36,7 @@
 #if defined(QLJS_HAVE_LIBGEN_H) && QLJS_HAVE_LIBGEN_H
 #elif defined(__has_include)
 #if __has_include(<libgen.h>)
-#define QLJS_HAVE_LIBGEN_H 1
+//@@@ #define QLJS_HAVE_LIBGEN_H 1
 #endif
 #elif defined(__unix__)
 #define QLJS_HAVE_LIBGEN_H 1
@@ -84,7 +84,7 @@
 #if defined(QLJS_HAVE_UNISTD_H) && QLJS_HAVE_UNISTD_H
 #elif defined(__has_include)
 #if __has_include(<unistd.h>) && !defined(__EMSCRIPTEN__)
-#define QLJS_HAVE_UNISTD_H 1
+//@@@ #define QLJS_HAVE_UNISTD_H 1
 #endif
 #elif defined(__unix__) && !defined(__EMSCRIPTEN__)
 #define QLJS_HAVE_UNISTD_H 1

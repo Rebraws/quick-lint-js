@@ -26,6 +26,10 @@ function (quick_lint_js_collect_copyright NAME)
     set(LICENSE_LINKMAP_TYPE elf)
   elseif (CMAKE_SYSTEM_NAME STREQUAL Windows AND MSVC)
     set(LICENSE_LINKMAP_TYPE pe)
+  elseif (CMAKE_SYSTEM_NAME STREQUAL Windows AND MINGW)
+    # HACK(strager): Assume the linker is lld.
+    # TODO(strager): Propertly detect COFF lld.
+    set(LICENSE_LINKMAP_TYPE coff-lld)
   else ()
     message("${ERROR_MESSAGE_SEVERITY}" "Unrecognized platform. Not generating copyright file.")
     return ()
@@ -43,6 +47,13 @@ function (quick_lint_js_collect_copyright NAME)
   endif ()
 
   set(COLLECT_COPYRIGHT_OPTIONS)
+  if (LICENSE_LINKMAP_TYPE STREQUAL coff-lld)
+    target_link_libraries(
+      "${_TARGET}"
+      PRIVATE
+      "-Wl,-Xlink,-reproduce:${LINKMAP_FILE}"
+    )
+  endif ()
   if (LICENSE_LINKMAP_TYPE STREQUAL emscripten)
     target_link_libraries(
       "${_TARGET}"

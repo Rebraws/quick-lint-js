@@ -162,7 +162,8 @@ void print_version_information();
 }
 }
 
-#if defined(_WIN32)
+#if defined(_WIN32) && 0
+extern "C" int wmain(int argc, wchar_t **wargv);
 int wmain(int argc, wchar_t **wargv) {
   quick_lint_js::vector_instrumentation::register_dump_on_exit_if_requested();
   quick_lint_js::initialize_translations_from_environment();

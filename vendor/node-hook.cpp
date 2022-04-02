@@ -36,7 +36,8 @@ FARPROC WINAPI delay_load_notify_hook(unsigned dliNotify,
 }
 }
 
-extern "C" const ::PfnDliHook __pfnDliNotifyHook2 = delay_load_notify_hook;
+extern "C" ::PfnDliHook __pfnDliNotifyHook2;
+::PfnDliHook __pfnDliNotifyHook2 = delay_load_notify_hook;
 #endif
 
 // quick-lint-js finds bugs in JavaScript programs.
