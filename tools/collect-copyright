@@ -23,15 +23,20 @@ import unittest
 
 logger = logging.getLogger(__name__)
 
+def VendorProject(typing.NamedTuple):
+    vendor_project_name: str
+
+    def print_copyright(self, ...) -> None:
+        print(...) # @@@
+
 archive_to_vendor_project = {
-    "boost.lib": "boost",
-    "libboost.a": "boost",
-    "libquick-lint-js-lib.a": None,
-    "libsimdjson.a": "simdjson",
-    "node-hook.lib": None,
-    "node-napi.lib": None,  # Dynamically linked.
-    "quick-lint-js-lib.lib": None,
-    "simdjson.lib": "simdjson",
+    "boost.lib": VendorProject("boost"),
+    "libboost.a": VendorProject("boost"),
+    "libquick-lint-js-lib.a": InternalLibrary(),
+    "libsimdjson.a": VendorProject("simdjson"),
+    "node-hook.lib": WindowsImplib(),
+    "quick-lint-js-lib.lib": InternalLibrary(),
+    "simdjson.lib": VendorProject("simdjson"),
 
     # TODO(strager): Audit these libraries.
     "LIBCMT.lib": None,
@@ -54,17 +59,18 @@ archive_to_vendor_project = {
     "vcruntimed.lib": None,
 
     # Windows import libraries (no special licensing needed):
-    "Pathcch.lib": None,
-    "libPathcch.a": None,
-    "libadvapi32.a": None,
-    "libcomdlg32.a": None,
-    "libgdi32.a": None,
-    "libole32.a": None,
-    "liboleaut32.a": None,
-    "libshell32.a": None,
-    "libuser32.a": None,
-    "libuuid.a": None,
-    "libwinspool.a": None,
+    "Pathcch.lib": WindowsImplib(),
+    "libPathcch.a": WindowsImplib(),
+    "libadvapi32.a": WindowsImplib(),
+    "libcomdlg32.a": WindowsImplib(),
+    "libgdi32.a": WindowsImplib(),
+    "libole32.a": WindowsImplib(),
+    "liboleaut32.a": WindowsImplib(),
+    "libshell32.a": WindowsImplib(),
+    "libuser32.a": WindowsImplib(),
+    "libuuid.a": WindowsImplib(),
+    "libwinspool.a": WindowsImplib(),
+    "node-napi.lib": WindowsImplib(),
 
     # MinGW import libraries (no special licensing needed,
     # but shipping DLLs might have license restrictions):
@@ -73,7 +79,7 @@ archive_to_vendor_project = {
     "libunwind.dll.a": None,
 
     # @@@ OSS; needs attribution
-    "libc++.a": None,
+    "libc++.a": MingwLibrary(),
     "libclang_rt.builtins-x86_64.a": None,
     "libkernel32.a": None,
     "libmingw32.a": None,
